@@ -14,7 +14,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Section from './Section';
 import EmailRow from './EmailRow';
 import { db } from './firebase';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 function EmailList() {
 
@@ -69,6 +69,7 @@ function EmailList() {
             <div className="emailList_list">
                 {emails.map((email) =>(
                     <EmailRow
+                        key ={email.id}
                         title={email.name}
                         subject={email.subject}
                         description={email.message}
