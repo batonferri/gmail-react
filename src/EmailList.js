@@ -14,23 +14,20 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Section from './Section';
 import EmailRow from './EmailRow';
 import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
 function EmailList() {
 
     const[emails, setEmails] = useState([]);
 
-    const emailsCollection = collection(db, "emails");
     
-    useEffect(() => {
-        const getEmails = async () => {
-          const data = await getDocs(emailsCollection);
-          setEmails(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-    
-        getEmails();
-      }, []);
-
+    useEffect(
+        () => 
+            onSnapshot(collection(db, "emails"), (snapshot) =>
+          setEmails(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+          ),
+        []
+        );
 
     return (
         <div className='emailList'> 
