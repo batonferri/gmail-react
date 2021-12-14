@@ -1,5 +1,5 @@
 import { Checkbox, IconButton } from '@mui/material';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./EmailList.css"
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -13,8 +13,23 @@ import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import Section from './Section';
 import EmailRow from './EmailRow';
+import { db } from './firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 function EmailList() {
+
+    const[emails, setEmails] = useState([]);
+    const emailsCollection = collection(db, "emails");
+    
+    useEffect(() => {
+        const getEmails = async () => {
+          const data = await getDocs(emailsCollection);
+          setEmails(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+    
+        getEmails();
+      }, []);
+
     return (
         <div className='emailList'> 
             <div className="emailList_settings">
@@ -53,14 +68,14 @@ function EmailList() {
             </div>
 
             <div className="emailList_list">
-                <EmailRow
-                title="David's Perfume"
-                subject="LAST CHANCE: Order today to receive by Xmas!"
-                description="Hi baton,
-                In case you missed it, today is the last day to order and receive 
-                in time for Christmas. We do have a couple of different specials running for the holiday season."
-                time="5:05 PM"
-                />
+                {emails.map((email) =>(
+                    <EmailRow
+                        title={email.to}
+                        subject={email.subject}
+                        description={email.message}
+                        time={new Date(email.timestamp?.seconds * 1000).toUTCString()}
+                    />
+                ))}
             </div>
 
         </div>
