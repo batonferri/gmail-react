@@ -83,7 +83,7 @@ function EmailList() {
                         title={email.name}
                         subject={email.subject}
                         description={email.message}
-                        time={new Date(email.timestamp?.seconds * 1000).toString().slice(0,24)}
+                        time={new Date(email.timestamp?.seconds * 1000).toString().slice(0,21)}
                     />
                 ))}
             </div>
