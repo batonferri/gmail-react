@@ -20,14 +20,6 @@ function EmailList() {
 
     const[emails, setEmails] = useState([]);
 
-    
-    // useEffect(
-    //     () => 
-    //         onSnapshot(collection(db, "emails"), (snapshot) =>
-    //       setEmails(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    //       ),
-    //     []
-    //     );
     useEffect(() => {
         const emailsCollection = collection(db, "emails");
         const q = query(emailsCollection, orderBy("timestamp", "desc"));

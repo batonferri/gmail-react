@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './SendMail.css'
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
-// import {useForm} from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { closeSendMessage } from './features/mailSlice';
 import { db } from './firebase';
@@ -12,14 +11,8 @@ function SendMail() {
     const [newTo, setNewTo] = useState("");
     const [newSubject, setNewSubject] = useState("");
     const [newMessage, setNewMessage] = useState("");
-    // const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const emailsCollection = collection(db, "emails");
-
-    // const onSubmit = (formData) =>{
-    //     console.log(formData);
-    //     dispatch(closeSendMessage());    
-    // };
 
     const sendEmail = async () => {
         await addDoc(emailsCollection, 
