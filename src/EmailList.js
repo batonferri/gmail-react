@@ -19,6 +19,7 @@ import { collection, getDocs } from 'firebase/firestore';
 function EmailList() {
 
     const[emails, setEmails] = useState([]);
+
     const emailsCollection = collection(db, "emails");
     
     useEffect(() => {
@@ -29,6 +30,7 @@ function EmailList() {
     
         getEmails();
       }, []);
+
 
     return (
         <div className='emailList'> 
@@ -70,7 +72,7 @@ function EmailList() {
             <div className="emailList_list">
                 {emails.map((email) =>(
                     <EmailRow
-                        title={email.to}
+                        title={email.name}
                         subject={email.subject}
                         description={email.message}
                         time={new Date(email.timestamp?.seconds * 1000).toUTCString()}
