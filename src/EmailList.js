@@ -33,8 +33,8 @@ function EmailList() {
 
     return (
         <div className='emailList'> 
-            <div className="emailList_settings">
-                <div className="emailList_settingsLeft">
+            <div className="emailList__settings">
+                <div className="emailList__settingsLeft">
                     <Checkbox/>
                     <IconButton>
                         <ArrowDropDownIcon />
@@ -46,7 +46,7 @@ function EmailList() {
                         <MoreVertIcon/>
                     </IconButton>
                 </div>
-                <div className="emailList_settingsRight">
+                <div className="emailList__settingsRight">
                     <IconButton>
                         <ChevronLeftIcon />
                     </IconButton>
@@ -68,7 +68,7 @@ function EmailList() {
                 <Section Icon={LocalOfferIcon} title="Promotions" color="green"/>
             </div>
 
-            <div className="emailList_list">
+            <div className="emailList__list">
                 {emails.map((email) =>(
                     <EmailRow
                         key ={email.id}
